@@ -1,4 +1,4 @@
-## Exchange API
+## url-shortener-api
 
 - written in Typescript, powered by Express.js and MongoDB
 
