@@ -13,24 +13,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const nanoid_1 = require("nanoid");
-const Link_model_1 = __importDefault(require("../model/Link.model"));
+const model_Link_1 = __importDefault(require("../model/model.Link"));
 const app_1 = require("../app");
+const validation_1 = require("../validation");
 function saveToDb(req, res, next) {
-    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        const fromIp = (_a = req.headers["x-forwarded-for"], (_a !== null && _a !== void 0 ? _a : req.connection.remoteAddress));
+        // shortenedUrl: http://localhost/abcdefghij
         const _id = nanoid_1.nanoid(10);
-        const shortenedUrl = `${app_1.HOST_HREF}/${_id}`;
-        const linkModel = new Link_model_1.default({
+        const newLink = new model_Link_1.default({
             _id,
-            shortenedUrl: shortenedUrl,
+            shortenedUrl: `${app_1.HOST_HREF}/${_id}`,
             originalUrl: req.body.originalUrl,
-            fromIp: fromIp || "",
+            fromIp: req.headers["x-forwarded-for"] ||
+                req.connection.remoteAddress ||
+                "",
             timestamp: Math.trunc(Date.now() / 1000),
         });
-        yield linkModel.save();
+        yield newLink.save();
         // links.push(link);
-        res.shortenedUrl = shortenedUrl;
+        res.shortenedUrl = newLink.shortenedUrl;
         next();
     });
 }
@@ -43,7 +44,7 @@ function validateUrl(req, res, next) {
             errMessage: "originalUrl is needed",
         });
     }
-    if (!Validation.isValidUrl(req.body.originalUrl)) {
+    if (!validation_1.Validation.isValidUrl(req.body.originalUrl)) {
         res.status(500);
         return res.send({
             success: false,

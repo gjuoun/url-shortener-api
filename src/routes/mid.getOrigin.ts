@@ -1,5 +1,5 @@
 import { HOST_HREF, express } from "../app";
-import Link from "../model/Link.model";
+import Link from "../model/model.Link";
 
 async function getOriginalUrl(
   req: express.Request,

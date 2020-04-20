@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = require("../app");
-const Link_model_1 = __importDefault(require("../model/Link.model"));
+const model_Link_1 = __importDefault(require("../model/model.Link"));
 function getOriginalUrl(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!req.params.shortenedUrl) {
@@ -22,7 +22,7 @@ function getOriginalUrl(req, res, next) {
                 errMessage: "No shortened url is provided",
             });
         }
-        const link = yield Link_model_1.default.findById(req.params.shortenedUrl);
+        const link = yield model_Link_1.default.findById(req.params.shortenedUrl);
         if (!link) {
             return res.redirect(app_1.HOST_HREF);
         }

@@ -1,4 +1,4 @@
-import { mongoose } from "../app";
+import { mongoose } from "../db";
 
 export interface Link extends mongoose.Document {
   _id: string;

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Validation;
 (function (Validation) {
     function isValidUrl(url) {
@@ -6,5 +7,5 @@ var Validation;
         return urlRegExp.test(url);
     }
     Validation.isValidUrl = isValidUrl;
-})(Validation || (Validation = {}));
+})(Validation = exports.Validation || (exports.Validation = {}));
 //# sourceMappingURL=validation.js.map

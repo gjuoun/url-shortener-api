@@ -5,7 +5,7 @@ import { getOriginalUrl } from "./mid.getOrigin";
 const route = Router();
 
 route.get("/", validateUrl, saveToDb, (req, res) => {
-  res.json(<App.SuccessMessage>{
+  res.json({
     success: true,
     shortenedUrl: res.shortenedUrl,
   });

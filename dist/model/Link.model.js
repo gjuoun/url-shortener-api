@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const app_1 = require("../app");
-const Link = new app_1.mongoose.Schema({
+const db_1 = require("../db");
+const Link = new db_1.mongoose.Schema({
     _id: {
         type: String,
         required: true,
@@ -23,5 +23,5 @@ const Link = new app_1.mongoose.Schema({
         required: true,
     },
 });
-exports.default = app_1.mongoose.model("link", Link);
+exports.default = db_1.mongoose.model("link", Link);
 //# sourceMappingURL=Link.model.js.map

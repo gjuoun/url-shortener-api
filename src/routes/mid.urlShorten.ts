@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import Link from "../model/Link.model";
+import Link from "../model/model.Link";
 import { HOST_HREF, express } from "../app";
 import { Validation } from "../validation";
 
