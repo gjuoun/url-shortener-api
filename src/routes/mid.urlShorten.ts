@@ -1,29 +1,29 @@
 import { nanoid } from "nanoid";
 import Link from "../model/Link.model";
 import { HOST_HREF, express } from "../app";
-
-import * as vali from "../validation";
+import { Validation } from "../validation";
 
 async function saveToDb(
   req: express.Request,
   res: express.Response,
   next: Function
 ) {
-  const fromIp =
-    req.headers["x-forwarded-for"] ?? req.connection.remoteAddress!;
-
+  // shortenedUrl: http://localhost/abcdefghij
   const _id = nanoid(10);
-  const shortenedUrl = `${HOST_HREF}/${_id}`;
-  const linkModel = new Link({
+  const newLink = new Link({
     _id,
-    shortenedUrl: shortenedUrl,
+    shortenedUrl: `${HOST_HREF}/${_id}`,
     originalUrl: req.body.originalUrl,
-    fromIp: <string>fromIp || "",
+    fromIp:
+      <string>req.headers["x-forwarded-for"] ||
+      req.connection.remoteAddress! ||
+      "",
     timestamp: Math.trunc(Date.now() / 1000),
   });
-  await linkModel.save();
+  await newLink.save();
   // links.push(link);
-  res.shortenedUrl = shortenedUrl;
+
+  res.shortenedUrl = newLink.shortenedUrl;
   next();
 }
 
@@ -39,7 +39,7 @@ function validateUrl(
       errMessage: "originalUrl is needed",
     });
   }
-  if (!vali.Validation.isValidUrl(req.body.originalUrl)) {
+  if (!Validation.isValidUrl(req.body.originalUrl)) {
     res.status(500);
     return res.send(<App.ErrorMessage>{
       success: false,
