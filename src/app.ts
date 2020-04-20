@@ -1,49 +1,26 @@
-import { nanoid } from "nanoid";
+import dotenv from "dotenv";
+if (process.env.NODE_ENV !== "prod") {
+  dotenv.config();
+}
 import express from "express";
 import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import route from "./routes/route.index";
 
 const app = express();
+const HOST_HREF = "http://" + process.env.DOMAIN || "localhost";
 
-interface Link {
-  _id: string;
-  originalUrl: string;
-  fromIp: string;
-  timestamp: number;
-}
-
-const links: Link[] = [];
-app.use(bodyParser.json());
-
-app.get("/", (req, res) => {
-  if (!req.body.originalUrl) {
-    res.status(500);
-    return res.send({ success: false, message: "originalUrl is needed" });
-  } else if (!isValidUrl(req.body.originalUrl)) {
-    res.status(500);
-    return res.send({ success: false, messgage: "Url is not valid" });
-  }
-
-  const fromIp =
-    req.headers["x-forwarded-for"] ?? req.connection.remoteAddress!;
-
-  const _id = nanoid(10);
-  const link: Link = {
-    _id,
-    originalUrl: req.body.originalUrl,
-    fromIp: <string>fromIp ?? "",
-    timestamp: Math.trunc(Date.now() / 1000),
-  };
-
-  links.push(link);
-  console.log(links);
-  res.json({ success: true, link: "http://localhost/" + _id });
+mongoose.connect(process.env.MONGO_CONN!, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-function isValidUrl(url: string) {
-  const urlRegExp = /^https?:\/\/(.+).*/i;
-  return urlRegExp.test(url);
-}
+app.use(bodyParser.json());
+
+app.use("/", route);
 
 app.listen(3000, () => {
   console.log("Running on 3000");
 });
+
+export { express, mongoose, HOST_HREF };

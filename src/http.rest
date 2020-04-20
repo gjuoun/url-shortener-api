@@ -2,5 +2,5 @@ GET http://localhost:3000/
 Content-Type: application/json
 
 {
-  "originalUrl": "http://localhost:3000/12345223132"
+  "originalUrl": "https://github.com/gjuoun/url-shortener-api"
 }

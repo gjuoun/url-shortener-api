@@ -1,0 +1,1 @@
+{"version":3,"file":"route.getOrigin.js","sourceRoot":"","sources":["../../src/routes/route.getOrigin.ts"],"names":[],"mappings":";;AAAA,qCAAiC;AAEjC,MAAM,KAAK,GAAG,gBAAM,EAAE,CAAC;AAEvB,KAAK,CAAC,GAAG,CAAC,iBAAiB,EAAE,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE;IACxC,OAAO,CAAC,GAAG,CAAC,WAAW,CAAC,CAAC;AAC3B,CAAC,CAAC,CAAC;AAEH,kBAAe,KAAK,CAAC"}
