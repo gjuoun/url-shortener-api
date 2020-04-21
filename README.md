@@ -22,7 +22,7 @@ http://<your_domain>/jNbMY-6Vug
 ### Usage:
 
 ```
-Requirement: To serve in local, you need Redis installed in local/remote
+Requirement: To serve in local, you need MongoDB installed in local/remote
 
 1. Clone this repo
 2. Set environment variable, please copy "example.env" and rename it ".env", then edit the .env file
