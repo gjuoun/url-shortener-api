@@ -1,0 +1,112 @@
+openapi: 3.0.0
+info:
+  title: url-shortener-api
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/{shortenedUrl}':
+    get:
+      summary: 'GET /{shortenedUrl}'
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+              examples:
+                example:
+                  value:
+                    success: true
+                    data:
+                      originalUrl: 'https://httpstatuses.com/'
+                      shortenedUrl: 'http://localhost:3000/jmboF75e2f'
+                      createdAt: 1589323548
+      operationId: 'get-:shortenedUrl'
+      description: Return shortened information
+    parameters:
+      - schema:
+          type: string
+        name: shortenedUrl
+        in: path
+        required: true
+  /generate:
+    post:
+      summary: POST /generate
+      operationId: post-generate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+              examples:
+                example-1:
+                  value:
+                    success: true
+                    data:
+                      originalUrl: 'https://httpstatuses.com/'
+                      shortenedUrl: 'http://localhost:3000/jmboF75e2f'
+                      createdAt: 1589323548
+      description: Generate a short url by a long url
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                originalUrl:
+                  type: string
+            examples:
+              example-1:
+                value:
+                  originalUrl: 'https://github.com/'
+        description: ''
+components:
+  schemas:
+    ApiResponse:
+      title: ApiResponse
+      type: object
+      description: |-
+        if success is true, return data
+        else return message
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/ShortenedUrl'
+      required:
+        - success
+      x-examples:
+        example:
+          success: true
+          data:
+            _id: fIipa2_kS0
+            shortenedUrl: 'http://localhost:3000/fIipa2_kS0'
+            originalUrl: 'https://httpstatuses.com/'
+            fromIp: '::1'
+            timestamp: 1589321663
+            __v: 0
+    ShortenedUrl:
+      title: ShortenedUrl
+      type: object
+      properties:
+        originalUrl:
+          type: string
+        shortenedUrl:
+          type: string
+        createdAt:
+          type: number
+      required:
+        - originalUrl
+        - shortenedUrl
+      x-examples:
+        example-1:
+          originalUrl: 'https://httpstatuses.com/'
+          shortenedUrl: 'http://localhost:3000/jmboF75e2f'
+          createdAt: 1589323548
