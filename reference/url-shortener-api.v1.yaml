@@ -8,7 +8,8 @@ paths:
   '/{shortenedUrl}':
     get:
       summary: 'GET /{shortenedUrl}'
-      tags: []
+      tags:
+        - API Usage
       responses:
         '200':
           description: OK
@@ -24,6 +25,17 @@ paths:
                       originalUrl: 'https://httpstatuses.com/'
                       shortenedUrl: 'http://localhost:3000/jmboF75e2f'
                       createdAt: 1589323548
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+              examples:
+                example-1:
+                  value:
+                    success: false
+                    message: "this url doesn't exist"
       operationId: 'get-:shortenedUrl'
       description: Return shortened information
     parameters:
@@ -65,6 +77,8 @@ paths:
                 value:
                   originalUrl: 'https://github.com/'
         description: ''
+      tags:
+        - API Usage
 components:
   schemas:
     ApiResponse:
