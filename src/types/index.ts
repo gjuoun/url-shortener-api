@@ -14,8 +14,10 @@ export interface ApiResponse{
   data?: ShortenedUrl
 }
 export interface ShortenedUrl{
-  originalUrl: string
-  shortenedUrl: string
+  shortenedUrl: string;
+  originalUrl: string;
+  fromIp: string;
+  createdAt: number;
 }
 
 export {};

@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 import Link from "../model";
-import { DOMAIN, express } from "../app";
+import { DOMAIN } from "../app";
 import { Router } from "express";
 import { validateUrl } from "./middlewares";
 
@@ -33,7 +33,7 @@ route.post("/generate", validateUrl, async (req, res, next) => {
     shortenedUrl: `${DOMAIN}/${_id}`,
     originalUrl: req.body.originalUrl,
     fromIp: req.ip || "",
-    timestamp: Math.trunc(Date.now() / 1000),
+    createdAt: Math.trunc(Date.now() / 1000),
   });
   await newLink.save();
   res.data = newLink;
