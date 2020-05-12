@@ -72,6 +72,8 @@ paths:
               properties:
                 originalUrl:
                   type: string
+              required:
+                - originalUrl
             examples:
               example-1:
                 value:
@@ -85,17 +87,8 @@ components:
       title: ApiResponse
       type: object
       description: |-
-        if success is true, return data
+        if success is true, return data.
         else return message
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-        data:
-          $ref: '#/components/schemas/ShortenedUrl'
-      required:
-        - success
       x-examples:
         example:
           success: true
@@ -106,9 +99,24 @@ components:
             fromIp: '::1'
             timestamp: 1589321663
             __v: 0
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+          description: ''
+        data:
+          $ref: '#/components/schemas/ShortenedUrl'
+      required:
+        - success
     ShortenedUrl:
       title: ShortenedUrl
       type: object
+      x-examples:
+        example-1:
+          originalUrl: 'https://httpstatuses.com/'
+          shortenedUrl: 'http://localhost:3000/jmboF75e2f'
+          createdAt: 1589323548
       properties:
         originalUrl:
           type: string
@@ -119,8 +127,4 @@ components:
       required:
         - originalUrl
         - shortenedUrl
-      x-examples:
-        example-1:
-          originalUrl: 'https://httpstatuses.com/'
-          shortenedUrl: 'http://localhost:3000/jmboF75e2f'
-          createdAt: 1589323548
+        - createdAt
