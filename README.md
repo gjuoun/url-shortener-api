@@ -1,4 +1,4 @@
-## Gas Price API
+## Url Shortener API
 
 > Shorten a long link into a short one, as simple as it is
 
