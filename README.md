@@ -1,70 +1,34 @@
-## url-shortener-api
-written in Typescript, powered by Express.js and MongoDB
+## Gas Price API
 
----
+> Shorten a long link into a short one, as simple as it is
 
-- This api server will generate a shortlink for the user.
+[Github repo](https://github.com/gjuoun/url-shortener-api)
 
-```
-For example, this link:
-https://cloud.mongodb.com/v2/5dbfa31cf2a30b6a02368430#metrics/replicaSet/5e94b3fff17a7a6a171b95dd/explorer/Cat/cats/find
+[API documentation](https://stoplight.io/p/docs/gh/gjuoun/url-shortener-api)
 
-will become:
-http://<your_domain>/jNbMY-6Vug
-```
+## Install
 
-- Dockerfile is provided, please be advised that you have to the SET ENVIRONMENT VARIABLES.
+    > git clone https://github.com/gjuoun/url-shortener-api
 
-- Server default port: 3000
+## Usage
 
----
+    > npm run build
 
-### Usage:
+    > npm start
 
-```
-Requirement: To serve in local, you need MongoDB installed in local/remote
+## Docker Usage
 
-1. Clone this repo
-2. Set environment variable, please copy "example.env" and rename it ".env", then edit the .env file
-  - example for local setup
-    NODE_ENV=dev
-    PORT=3000
-    DOMAIN=localhost:3000
-    MONGO_CONN=<your mongo connection string>
+    > docker image build -t url-shortener-api:1.0 .
 
-  - example for production setup
-    NODE_ENV=prod
-    PORT=3000
-    DOMAIN=<your domain>
-    MONGO_CONN=<your mongo connection string>
-3. Run "npm install"
-4. Run "npm start"
+    > docker run -d \
+      -p 3000:3000 \
+      -e DOMAIN=localhost:3000 \
+      -e MONGO_CONN=<Your Mongo connection string>
+      url-shortener-api:1.0
 
-Done!
-```
+## Roadmap
 
----
-
-### Test Your API:
-
-There are only one endpoint but you can fetch in two ways,
-
-Use your favorite rest client
-
-#### Generate a shortened link
-```
-GET http://localhost:3000/
-Content-Type: application/json
-
-{
-  "originalUrl": "https://github.com/gjuoun/url-shortener-api"
-}
-
-
-response:
-{
-    "success": true,
-    "shortenedUrl": "http://localhost:3000/-EU-uxDH47"
-}
-```
-
+- [x] Generate Url at local development environment
+- [x] Dockerfile
+- [x] MongoDb connection
+- [ ] Security features
