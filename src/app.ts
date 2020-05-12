@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 if (process.env.NODE_ENV !== "prod") {
   dotenv.config();
 }
-import express, { NextFunction } from "express";
+import express from "express";
 import bodyParser from "body-parser";
 import route from "./routes/index";
 import { ApiResponse } from "types";
@@ -19,7 +19,11 @@ app.use('*', (req, res) => {
   if (res.data) {
     res.send(<ApiResponse>{
       success: true,
-      data: res.data
+      data: {
+        originalUrl: res.data.originalUrl,
+        shortenedUrl: res.data.shortenedUrl,
+        createdAt: res.data.createdAt
+      }
     })
   } else {
     res.send(<ApiResponse>{
@@ -32,7 +36,6 @@ app.use('*', (req, res) => {
 
 /* ------------------------------ Error handler ----------------------------- */
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.log(err)
 
   res.send(<ApiResponse>{
     success: false,

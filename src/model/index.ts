@@ -1,11 +1,7 @@
 import { mongoose } from "../db";
-
-export interface Link extends mongoose.Document {
+import {ShortenedUrl} from '../types'
+export interface Link extends mongoose.Document, ShortenedUrl {
   _id: string;
-  shortenedUrl: string;
-  originalUrl: string;
-  fromIp: string;
-  timestamp: string;
 }
 
 const Link = new mongoose.Schema({
@@ -25,7 +21,7 @@ const Link = new mongoose.Schema({
     type: String,
     required: true,
   },
-  timestamp: {
+  createdAt: {
     type: Number,
     required: true,
   },
