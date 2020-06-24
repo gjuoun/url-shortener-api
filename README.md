@@ -12,6 +12,8 @@
 
 ## Usage
 
+Copy `example.env` as `.env`, and provide mongoDB connection string as `MONGO_CONN=<your_mongo_connection_string>` 
+
     > npm run build
 
     > npm start
