@@ -12,7 +12,7 @@
 
 ## Usage
 
-Copy `example.env` as `.env`, and provide mongoDB connection string as `MONGO_CONN=<your_mongo_connection_string>` 
+Copy `.env.example` as `.env`, and provide mongoDB connection string as `MONGO_CONN=<your_mongo_connection_string>` 
 
     > npm run build
 
