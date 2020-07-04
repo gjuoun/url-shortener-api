@@ -28,7 +28,7 @@ route.get("/:shortenedUrl", async (req, res, next) => {
 // generate a new shortened Url
 route.post("/generate", validateUrl, async (req, res, next) => {
   const _id = nanoid(10);
-  const newLink = new Link({
+  const newLink = new LinkModel({
     _id,
     shortenedUrl: `${DOMAIN}/${_id}`,
     originalUrl: req.body.originalUrl,

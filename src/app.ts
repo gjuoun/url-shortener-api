@@ -36,7 +36,6 @@ app.use('*', (req, res) => {
 
 /* ------------------------------ Error handler ----------------------------- */
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-
   res.send(<ApiResponse>{
     success: false,
     message: err.message
