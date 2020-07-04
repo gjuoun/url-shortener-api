@@ -2,9 +2,11 @@ import { mongoose } from "../db";
 import {ShortenedUrl} from '../types'
 export interface Link extends mongoose.Document, ShortenedUrl {
   _id: string;
+  shortenedUrl :string,
+  originalUrl: string
 }
 
-const Link = new mongoose.Schema({
+const LinkModel = new mongoose.Schema({
   _id: {
     type: String,
     required: true,
@@ -27,4 +29,4 @@ const Link = new mongoose.Schema({
   },
 });
 
-export default mongoose.model<Link>("link", Link);
+export default mongoose.model<Link>("link", LinkModel);

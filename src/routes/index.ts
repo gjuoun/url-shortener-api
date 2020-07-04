@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import Link from "../model";
+import LinkModel, {Link } from "../model";
 import { DOMAIN } from "../app";
 import { Router } from "express";
 import { validateUrl } from "./middlewares";
@@ -9,11 +9,10 @@ const route = Router();
 // return original url information
 route.get("/:shortenedUrl", async (req, res, next) => {
   if (req.params.shortenedUrl) {
-    const link = await Link.findById(req.params.shortenedUrl);
+    const link = await LinkModel.findById(req.params.shortenedUrl);
 
     if (link) {
-      res.data = link
-      next()
+      res.redirect(link.originalUrl)
     } else {
       res.status(404)
       next(new Error("this url doesn't exist"))
