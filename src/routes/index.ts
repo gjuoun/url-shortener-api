@@ -13,6 +13,7 @@ route.get("/:shortenedUrl", async (req, res, next) => {
 
     if (link) {
       res.redirect(link.originalUrl)
+      
     } else {
       res.status(404)
       next(new Error("this url doesn't exist"))
